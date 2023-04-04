@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Products Area Starts ***** -->
+<section class="section" id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <h5 style="color:white;">.</h5>
+                </div>
+                <div class="section-heading">
+                    <h2>ВЕСІЛЬНІ СУКНІ</h2>
+                </div>
+                <div><a href="/">Головна</a> > <a href="/sykni">Весільні сукні</a><a th:if="${filterText !=null}" > > </a><a th:if="${filterText !=null}" th:href="@{'/sykni?filter='+${filterLink}}" th:text="${filterText}"></a></div>
+                <div class="section-heading">
+                    <form th:method="get" th:action="@{/sykni}">
+                        <select id="contact" name="filter">
+                            <option value="priceDESC">Ціна за спаданням</option>
+                            <option value="priceASC">Ціна за зростанням</option>
+                            <option value="bestseller">Бестселлери</option>
+                            <option value="discount">Розпродаж</option>
+                            <option value="newGood">Новинки</option>
+                        </select>
+                        <button type="submit" id="form-submit" class="main-dark-button"><i
+                                class="fa fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3" th:each="dress: ${dresses}">
+                <a th:href="@{${'/sykni/' + dress.id}}">
+                    <div class="item">
+                        <div class="thumb">
+                            <img style="width: auto;height: 390px" th:src="@{${'/img/' + dress.pictures[0]}}">
+                        </div>
+                        <div class="down-content">
+                            <span style="color: red;font-size: 10px" th:if="${dress.ifNew}">Новинка</span>
+                            <h4 th:text="${dress.name}"></h4>
+                            <span th:text="@{${dress.price} +' грн'}"></span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
+<section class="section" id="women">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>НАШІ БЕСТСЕЛЛЕРИ</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kid-item-carousel">
+                    <div class="owl-kid-item owl-carousel">
+                        <div class="item" th:each="best: ${bestsellers}">
+                            <a th:href="@{${'/sykni/' + best.id}}">
+                                <div class="thumb">
+                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
+                                </div>
+                                <div class="down-content">
+                                    <span style="color: red;font-size: 10px" th:if="${best.ifNew}">Новинка</span>
+                                    <h4 th:text="${best.name}"></h4>
+                                    <span th:text="@{${best.price} +' грн'}"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
+<section class="section" id="kids">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>РЕКОМЕНДАЦІЇ</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kid-item-carousel">
+                    <div class="owl-kid-item owl-carousel">
+                        <div class="item" th:each="accessory: ${accessories}">
+                            <a th:href="@{${'/accessory/' + accessory.id}}">
+                                <div class="thumb">
+                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + accessory.pictures[0]}}">
+                                </div>
+                                <div class="down-content">
+                                    <h4 th:text="${accessory.name}"></h4>
+                                    <span th:text="@{${accessory.price} +' грн'}"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+</body>
+</html>

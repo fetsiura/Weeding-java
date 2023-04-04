@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="/" class="logo">
+            <img src="../images/logo.png">
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+            <li class="submenu">
+              <a href="javascript:;">Сукні</a>
+              <ul>
+                <li><a href="/sykni">Весільні сукні</a></li>
+                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+              </ul>
+            </li>
+            <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+            <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+            <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+            <div th:if="${admin != null}">
+              <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+              <li class="scroll-to-section">
+                <form th:action="@{/logout}" method="post">
+                  <button type="submit">Вихід</button>
+                </form>
+              </li>
+            </div>
+
+          </ul>
+          <a class='menu-trigger'>
+            <span>Меню</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading about-page-heading" id="top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="inner-content">
+          <h2>Знайди Нас</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<!-- ***** Contact Area Starts ***** -->
+<div class="contact-us">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div><a href="/">Головна</a> > <a href="/contacy">Контакти</a></div>
+
+        <div id="map">
+          <iframe src="https://maps.google.com/maps?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%A1%D0%B5%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%BA%D0%B8%20%D0%9B%D0%B5%D0%B2%D1%87%D0%B0%D0%BD%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%BE%D1%97,%2013,%20%D0%9B%D1%83%D1%86%D1%8C%D0%BA,%20%D0%92%D0%BE%D0%BB%D0%B8%D0%BD%D1%81%D1%8C%D0%BA%D0%B0%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,%20%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0,%2043000&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <!-- You can simply copy and paste "Embed a map" code from Google Maps for any location. -->
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="section-heading">
+          <h2>Наше розташування</h2>
+        </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <span>вул. Сенаторки Левчаневського, 13, Луцьк 43000 </span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ***** Contact Area Ends ***** -->
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+
+<!-- jQuery -->
+<script src="js/jquery-2.1.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Plugins -->
+<script src="js/owl-carousel.js"></script>
+<script src="js/accordions.js"></script>
+<script src="js/datepicker.js"></script>
+<script src="js/scrollreveal.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/imgfix.min.js"></script>
+<script src="js/slick.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/isotope.js"></script>
+
+<!-- Global Init -->
+<script src="js/custom.js"></script>
+
+<script>
+
+  $(function() {
+    var selectedClass = "";
+    $("p").click(function(){
+      selectedClass = $(this).attr("data-rel");
+      $("#portfolio").fadeTo(50, 0.1);
+      $("#portfolio div").not("."+selectedClass).fadeOut();
+      setTimeout(function() {
+        $("."+selectedClass).fadeIn();
+        $("#portfolio").fadeTo(50, 1);
+      }, 500);
+
+    });
+  });
+
+</script>
+
+</body>
+
+</html>

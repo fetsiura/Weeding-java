@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Products Area Starts ***** -->
+<section class="section" id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Вхід</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <form id="contact" action="" th:method="post" th:action="@{/login}">
+                    <div class="col-lg-6">
+                        <fieldset>
+                            <input name="email" type="email" id="email" placeholder="Емейл" required>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                        <fieldset>
+                            <input name="password" type="password" id="password" placeholder="Пароль" required>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                        <fieldset>
+                            <button type="submit" id="form-submit" class="main-dark-button"><i
+                                    class="fa fa-paper-plane"></i></button>
+                        </fieldset>
+                    </div>
+                    <!--                    <div class="col-lg-6">-->
+                    <!--                        <a th:href="@{/oauth2/authorization/facebook}" class="btn-lg btn-sm" type="submit">Вхід-->
+                    <!--                            через FACEBOOK</a>-->
+                    <!--                    </div>-->
+                    <div style="color: red" th:if="${errorAdmin != null}" th:text="${errorAdmin}"></div>
+                    <div style="color: red" th:if="${restoreOk != null}" th:text="${restoreOk}"></div>
+
+                </form>
+                <div class="col-lg-6" id="restorePasswordButton">
+                    <button>Відновити пароль</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
+<section class="section restoreSpecial" id="product" style="display: none">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div><span style="color: white">.</span></div>
+                <div class="section-heading">
+                    <h2>Відновити пароль</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <form th:method="get" th:action="@{/reset}">
+                <div class="col-lg-8">
+                    <fieldset>
+                        <input name="email" type="email" placeholder="Введіть емайл для відновлення" required>
+                    </fieldset>
+                </div>
+                <div class="col-lg-6">
+                    <fieldset>
+                        <button type="submit" class="main-dark-button"><i
+                                class="fa fa-paper-plane"></i></button>
+                    </fieldset>
+                </div>
+                <div style="color: red" th:if="${errorAdmin != null}" th:text="${errorAdmin}"></div>
+                <div style="color: red" th:if="${restoreOk != null}" th:text="${restoreOk}"></div>
+            </form>
+            <div class="col-lg-6" id="loginPasswordButton">
+                <button>Повернутись до входу</button>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+<script src="../js/hideRestore.js"></script>
+
+</body>
+</html>

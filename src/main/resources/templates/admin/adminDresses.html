@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div>
+                            <button id="newDressButton" class="btn"><i class="fa fa-folder"></i> Додати плаття
+                            </button>
+                        </div>
+                        <div>
+                            <span style="color:white">.</span>
+                        </div>
+                        <div>
+                            <button id="allDressesButton" class="btn"><i class="fa fa-folder"></i> Всі пляття
+                            </button>
+                        </div>
+                        <div>
+                            Кількість плаття:
+                            <span th:text="${dresses.size}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="thumb">
+                        <a href="/admin">
+                            <div>
+                                <button class="btn"><i class="fa fa-home"></i> Повернутись назад
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<section class="section" id="newDress" style="display: none">
+    <div class="container">
+        <div>
+            <span>Нове плаття:</span>
+            <form th:object="${dress}" th:method="post" th:action="@{/admin/add-dress}"
+                  enctype="multipart/form-data">
+                <div>
+                    <span>Назва:</span><br>
+                    <input type="text" name="name" required>
+                </div>
+                <div>
+                    <span>Ціна:</span><br>
+                    <input type="number" name="price" required>
+                </div>
+                <div>
+                    <span>Колір:</span><br>
+                    <input type="text" name="colour" required>
+                </div>
+                <div>
+                    <span>Розмір:</span><br>
+                    <input type="text" name="sizes" required>
+                </div>
+                <div>
+                    <span>Бренд:</span><br>
+                    <input type="text" name="brand" required>
+                </div>
+                <div>
+                    <span>Опис:</span><br>
+                    <textarea name="description" required></textarea>
+                </div>
+                <div>
+                    <span>Чи скидка:</span>
+                    <input type="checkbox" name="ifDiscount">
+                </div>
+                <div>
+                    <span>Чи бестселлер:</span>
+                    <input type="checkbox" name="ifBestsellers">
+                </div>
+                <div>
+                    <span> Чи нове:</span>
+                    <input type="checkbox" name="ifNew">
+                </div>
+                <div>
+                    <span> Чи є в наявності:</span>
+                    <input type="checkbox" name="ifAvailable">
+                </div>
+                <div>
+                    <span> Фото:</span><br>
+                    <input type="file" name="file" multiple required>
+                </div>
+                <button type="submit" class="btn"><i class="fa fa-download"></i> Зберегти</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="section" id="allDresses">
+    <div class="container">
+        <div class="row">
+            <div><a href="/admin">Адмін панель</a> > <a href="/admin/dresses">Управління платтями</a></div>
+
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>ВЕСІЛЬНІ СУКНІ</h2>
+                </div>
+                <div class="section-heading">
+                    <form th:method="get" th:action="@{/admin/dresses}">
+                        <select id="contact" name="filter">
+                            <option value="priceDESC">Ціна за спаданням</option>
+                            <option value="priceASC">Ціна за зростанням</option>
+                            <option value="bestseller">Бестселлери</option>
+                            <option value="discount">Розпродаж</option>
+                            <option value="newGood">Новинки</option>
+                        </select>
+                        <button type="submit" id="form-submit" class="main-dark-button"><i
+                                class="fa fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" th:each="dress: ${dresses}">
+                <div class="item">
+                    <div class="thumb" th:if="${not #lists.isEmpty (dress.pictures)}">
+                        <img style="width: auto;height: 390px" th:src="@{${'/img/' + dress.pictures[0]}}">
+                    </div>
+                    <div class="down-content">
+                        <span style="color: red;font-size: 10px" th:if="${dress.ifDiscount}">Розпродаж</span>
+                        <span style="color: red;font-size: 10px" th:if="${dress.ifNew}">Новинка</span>
+                        <h4 th:text="${dress.name}"></h4>
+                        <span th:text="@{${dress.price} +' грн'}"></span>
+                    </div>
+                </div>
+                <a th:href="@{'/admin/editDress?id='+${dress.id}}">
+                    <button class="btn"><i class="fa fa-close"></i> Редагувати</button>
+                </a>
+                <form th:method="post" th:action="@{/admin/deletedress}">
+                    <input type="hidden" name="id" th:value="${dress.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+<script src="../js/hideDress.js"></script>
+</body>
+</html>

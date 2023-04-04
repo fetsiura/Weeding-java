@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div>
+                            <button id="newAccessoryButton" class="btn"><i class="fa fa-folder"></i> Додати аксесуар
+                            </button>
+                        </div>
+                        <div>
+                            <span style="color:white">.</span>
+                        </div>
+                        <div>
+                            <button id="allAccessoriesButton" class="btn"><i class="fa fa-folder"></i> Всі аксесуари
+                            </button>
+                        </div>
+                        <div>
+                            Кількість аксесуарів:
+                            <span th:text="${accessories.size}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="thumb">
+                        <a href="/admin">
+                            <div>
+                                <button class="btn"><i class="fa fa-home"></i> Повернутись назад
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+
+<section class="section" id="newAccessory" style="display: none">
+    <div class="container">
+        <div><a href="/admin">Адмін панель</a> > <a href="/admin/accessory">Управління аксесуарами</a></div>
+        <div>
+            <span>Новий аксесуар:</span>
+            <form th:object="${accessory}" th:method="post" th:action="@{/admin/add-accessory}"
+                  enctype="multipart/form-data">
+                <div>
+                    <span>Назва:</span><br>
+                    <input type="text" name="name" required>
+                </div>
+                <div>
+                    <span>Тип аксесуара:</span><br>
+                    <select name="type">
+                        <option value="heels">Туфлі</option>
+                        <option value="veil">Фата</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Ціна:</span><br>
+                    <input type="number" name="price" required>
+                </div>
+                <div>
+                    <span>Бренд:</span><br>
+                    <input type="text" name="brand" required>
+                </div>
+                <div>
+                    <span>Опис:</span><br>
+                    <textarea name="description" required></textarea>
+                </div>
+
+                <div>
+                    <span>Чи скидка:</span>
+                    <input type="checkbox" name="ifDiscount">
+                </div>
+                <div>
+                    <span> Фото:</span><br>
+                    <input type="file" name="file" multiple required>
+                </div>
+                <button type="submit" class="btn"><i class="fa fa-download"></i> Зберегти</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="allAccessories" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div><a href="/admin">Адмін панель</a> > <a href="/admin/accessory">Управління аксесуарами</a></div>
+                <div class="section-heading">
+                    <h2>АКСЕСУАРИ</h2>
+                </div>
+                <!--                <div class="section-heading">-->
+                <!--                    <form th:method="get" th:action="@{/admin}">-->
+                <!--                        <select  name="filter">-->
+                <!--                            <option value="priceDESC">Ціна за спаданням</option>-->
+                <!--                            <option value="priceASC">Ціна за зростанням</option>-->
+                <!--                            <option value="discount">Розпродаж</option>-->
+                <!--                        </select>-->
+                <!--                        <button type="submit" id="form-submit" class="main-dark-button"><i-->
+                <!--                                class="fa fa-paper-plane"></i></button>-->
+                <!--                    </form>-->
+                <!--                </div>-->
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" th:each="accessory: ${accessories}">
+                <div class="item">
+                    <div class="thumb" th:if="${not #lists.isEmpty (accessory.pictures)}">
+                        <img style="width: auto;height: 390px" th:src="@{${'/img/' + accessory.pictures[0]}}">
+                    </div>
+                    <div class="down-content">
+                        <h4 th:text="${accessory.name}"></h4>
+                        <span th:text="@{${accessory.price} +' грн'}"></span>
+                    </div>
+                </div>
+                <a th:href="@{'/admin/editAccessory?id='+${accessory.id}}">
+                    <button class="btn"><i class="fa fa-close"></i> Редагувати</button>
+                </a>
+                <form th:method="post" th:action="@{/admin/deleteaccessory}">
+                    <input type="hidden" name="id" th:value="${accessory.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+<script src="../js/hideAccessory.js"></script>
+</body>
+</html>

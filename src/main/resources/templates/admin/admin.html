@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <a href="/admin/dresses">
+                            <div>
+                                <button class="btn"><i class="fa fa-folder"></i> Управління платтями
+                                </button>
+                            </div>
+                        </a>
+                        <div>
+                            Кількість плаття:<span th:text="${dressQuantity}"></span>
+                        </div>
+                        <a href="/admin/accessory">
+                            <div>
+                                <button class="btn"><i class="fa fa-folder"></i> Управління аксесуарами
+                                </button>
+                            </div>
+                        </a>
+                        <div>
+                            Кількість аксесуарів:<span th:text="${accessoryQuantity}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="thumb">
+                        <a href="/admin/customizePictures">
+                            <div>
+                                <button class="btn"><i class="fa fa-bars"></i> Управління
+                                    фоновими
+                                    фото
+                                </button>
+                            </div>
+                        </a>
+                        <div style="color: white"> .</div>
+                        <a href="/admin/gallery">
+                            <div>
+                                <button class="btn"><i class="fa fa-bars"></i> Управління
+                                    галереєю
+                                </button>
+                            </div>
+                        </a>
+                        <div style="color: white"> .</div>
+                        <a href="/admin/response">
+                            <div>
+                                <button class="btn"><i class="fa fa-bars"></i> Управління
+                                    відгуками
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+</body>
+</html>

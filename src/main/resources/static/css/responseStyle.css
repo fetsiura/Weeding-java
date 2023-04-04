@@ -1,0 +1,44 @@
+/* Style the container with a rounded border, grey background and some padding and margin */
+.containere {
+    border: 2px solid #ccc;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+/* Clear floats after containers */
+.containere::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Float images inside the container to the left. Add a right margin, and style the image as a circle */
+.containere img {
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+/* Increase the font-size of a span element */
+.containere span {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+/* Add media queries for responsiveness. This will center both the text and the image inside the container */
+@media (max-width: 500px) {
+    .containere {
+        text-align: center;
+    }
+
+    .containere img {
+        margin: auto;
+        float: none;
+        display: block;
+    }
+}
+.containere p {
+     overflow: auto;
+ }

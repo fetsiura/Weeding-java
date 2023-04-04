@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <a href="/admin">
+                        <div>
+                            <a href="/admin">
+                                <button class="btn"><i class="fa fa-home"></i> Повернутись назад</button>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="thumb">
+                        <span>Цей відділ для налаштування Ваших фонових зображень (головна сторінка)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section" id="customizePicturesField" >
+    <div class="container">
+        <div><a href="/admin">Адмін панель</a> > <a href="/admin/customizePictures">Управління фоновими фото</a></div>
+        <div style="background: darkgray">
+            <span>Головне фото "Розпродаж":</span>
+            <div th:if="${mainDiscount != null}">
+                <p>Рекомендований розмір 790 пікселів на 680 пікселів</p>
+                <img style="width: auto;height: 390px" th:src="@{${'/img/' + mainDiscount.filename}}">
+                <form th:method="post" th:action="@{/admin/deletePicture}">
+                    <input type="hidden" name="id" th:value="${mainDiscount.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+            <div th:if="${mainDiscount == null}">
+                <p>Це фото страндартне.Рекомендований розмір 790 пікселів на 680 пікселів</p>
+                <img  style="width: auto;height: 200px" src="../images/left-banner-image.jpg">
+            </div>
+            <form th:method="post" th:action="@{/admin/addPicture}" enctype="multipart/form-data">
+                <span>Додати нове фото:</span><br>
+                <input type="hidden" name="placeOfUse" value="mainDiscount">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn"><i class="fa fa-download"></i>Зберегти</button>
+            </form>
+        </div>
+        <div>
+            <span>Фото "Весільні плаття":</span>
+            <div th:if="${weedingDress != null}">
+                <p>Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img style="width: auto;height: 390px" th:src="@{${'/img/' + weedingDress.filename}}">
+                <form th:method="post" th:action="@{/admin/deletePicture}">
+                    <input type="hidden" name="id" th:value="${weedingDress.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+            <div th:if="${weedingDress == null}">
+                <p>Це фото страндартне.Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img  style="width: auto;height: 200px" src="../images/baner-right-image-01.jpg">
+            </div>
+            <form th:method="post" th:action="@{/admin/addPicture}" enctype="multipart/form-data">
+                <span>Додати нове фото:</span><br>
+                <input type="hidden" name="placeOfUse" value="weedingDress">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn"><i class="fa fa-download"></i>Зберегти</button>
+            </form>
+        </div>
+        <div style="background: darkgray">
+            <span>Фото "Вечірні плаття":</span>
+            <div th:if="${nightDress != null}">
+                <p>Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img style="width: auto;height: 390px" th:src="@{${'/img/' + nightDress.filename}}">
+                <form th:method="post" th:action="@{/admin/deletePicture}">
+                    <input type="hidden" name="id" th:value="${nightDress.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+            <div th:if="${nightDress == null}">
+                <p>Це фото страндартне.Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img  style="width: auto;height: 200px" src="../images/baner-right-image-02.jpg">
+            </div>
+            <form th:method="post" th:action="@{/admin/addPicture}" enctype="multipart/form-data">
+                <span>Додати нове фото:</span><br>
+                <input type="hidden" name="placeOfUse" value="nightDress">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn"><i class="fa fa-download"></i>Зберегти</button>
+            </form>
+        </div>
+        <div>
+            <span>Фото "Найбільш популярні":</span>
+            <div th:if="${mostPopular != null}">
+                <p>Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img style="width: auto;height: 390px" th:src="@{${'/img/' + mostPopular.filename}}">
+                <form th:method="post" th:action="@{/admin/deletePicture}">
+                    <input type="hidden" name="id" th:value="${mostPopular.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+            <div th:if="${mostPopular == null}">
+                <p>Це фото страндартне.Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img  style="width: auto;height: 200px" src="../images/baner-right-image-03.jpg">
+            </div>
+            <form th:method="post" th:action="@{/admin/addPicture}" enctype="multipart/form-data">
+                <span>Додати нове фото:</span><br>
+                <input type="hidden" name="placeOfUse" value="mostPopular">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn"><i class="fa fa-download"></i>Зберегти</button>
+            </form>
+        </div>
+        <div style="background: darkgray">
+            <span>Фото "Аксесуари":</span>
+            <div th:if="${accessory != null}">
+                <p>Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img style="width: auto;height: 390px" th:src="@{${'/img/' + accessory.filename}}">
+                <form th:method="post" th:action="@{/admin/deletePicture}">
+                    <input type="hidden" name="id" th:value="${accessory.id}">
+                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                </form>
+            </div>
+            <div th:if="${accessory == null}">
+                <p>Це фото страндартне.Рекомендований розмір 385 пікселів на 330 пікселів</p>
+                <img  style="width: auto;height: 200px" src="../images/baner-right-image-04.jpg">
+            </div>
+            <form th:method="post" th:action="@{/admin/addPicture}" enctype="multipart/form-data">
+                <span>Додати нове фото:</span><br>
+                <input type="hidden" name="placeOfUse" value="accessory">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn"><i class="fa fa-download"></i>Зберегти</button>
+            </form>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+
+
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+<script src="../js/hideElementAccessoryEdit.js"></script>
+
+</body>
+
+</html>

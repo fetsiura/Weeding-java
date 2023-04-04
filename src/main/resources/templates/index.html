@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div class="inner-content">
+                            <h4>СОФІЯ </h4>
+                            <span>Весільний салон</span>
+                            <div class="main-border-button">
+                                <a href="/sykni?filter=discount">Розпродаж!</a>
+                            </div>
+                        </div>
+                        <div th:if="${mainDiscount != null}">
+                            <img th:src="@{${'/img/' + mainDiscount.filename}}">
+                        </div>
+                        <div th:if="${mainDiscount == null}">
+                            <img src="images/left-banner-image.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Весільні плаття</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Весільні плаття</h4>
+                                            <p>Зроби цей день незабутнім.</p>
+                                            <div class="main-border-button">
+                                                <a href="/sykni">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${weedingDress != null}">
+                                        <img th:src="@{${'/img/' + weedingDress.filename}}">
+                                    </div>
+                                    <div th:if="${weedingDress == null}">
+                                        <img src="images/baner-right-image-01.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Вечірні плаття</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Вечірні плаття</h4>
+                                            <p>Цей вечір буде твоїм.</p>
+                                            <div class="main-border-button">
+                                                <a href="/vechirnipsykni">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${nightDress != null}">
+                                        <img th:src="@{${'/img/' + nightDress.filename}}">
+                                    </div>
+                                    <div th:if="${nightDress == null}">
+                                        <img src="images/baner-right-image-02.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Найбільш популярні</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Найбільш популярні</h4>
+                                            <p>Будь в ногу з модою.</p>
+                                            <div class="main-border-button">
+                                                <a href="/sykni?filter=bestseller">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${mostPopular != null}">
+                                        <img th:src="@{${'/img/' + mostPopular.filename}}">
+                                    </div>
+                                    <div th:if="${mostPopular == null}">
+                                        <img src="images/baner-right-image-03.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Аксесуари</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Аксесуари</h4>
+                                            <p>Крапля елегантності.</p>
+                                            <div class="main-border-button">
+                                                <a href="/aksesuary">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${accessory != null}">
+                                        <img th:src="@{${'/img/' + accessory.filename}}">
+                                    </div>
+                                    <div th:if="${accessory == null}">
+                                        <img src="images/baner-right-image-04.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<!-- ***** Women Area Starts ***** -->
+<section class="section" id="women">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>Новинки</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kid-item-carousel">
+                    <div class="owl-kid-item owl-carousel">
+
+                        <div class="item" th:each="best: ${novelties}">
+                            <a th:href="@{${'/sykni/' + best.id}}">
+                                <div class="thumb">
+                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
+                                </div>
+                                <div class="down-content">
+                                    <span style="color: red;font-size: 10px" th:if="${best.ifNew}">Новинка</span>
+                                    <h4 th:text="${best.name}"></h4>
+                                    <span th:text="@{${best.price} +' грн'}"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- ***** Women Area Ends ***** -->
+
+<!-- ***** Explore Area Starts ***** -->
+<section class="section" id="explore">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <h2>Explore Our Products</h2>
+                    <span>You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.</span>
+                    <div class="quote">
+                        <i class="fa fa-quote-left"></i>
+                        <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+                    </div>
+                    <p>There are 5 pages included in this HexaShop Template and we are providing it to you for
+                        absolutely free of charge at our TemplateMo website. There are web development costs for us.</p>
+                    <p>If this template is beneficial for your website or business, please kindly <a rel="nofollow"
+                                                                                                     href="https://paypal.me/templatemo"
+                                                                                                     target="_blank">support
+                        us</a> a little via PayPal. Please also tell your friends about our great website. Thank you.
+                    </p>
+                    <div class="main-border-button">
+                        <a href="products.html">Discover More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="leather">
+                                <h4>Leather Bags</h4>
+                                <span>Latest Collection</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="first-image">
+                                <img src="images/explore-image-01.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="second-image">
+                                <img src="images/explore-image-02.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="types">
+                                <h4>Different Types</h4>
+                                <span>Over 304 Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Explore Area Ends ***** -->
+
+<!-- ***** Social Area Starts ***** -->
+<section class="section" id="social">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/gallery">
+                    <div class="section-heading">
+                        <h2>НАШ БЛОГ</h2>
+                        <sp<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/singleProduct :: head}"></head>
+
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div th:insert="~{fragments/singleProduct :: preloader}"></div>
+
+<!-- ***** Preloader End ***** -->
+
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="../images/logo.png">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="submenu">
+                            <a href="javascript:;">Сукні</a>
+                            <ul>
+                                <li><a href="/sykni">Весільні сукні</a></li>
+                                <li><a href="/vechirnisykni">Вечірні сукні</a></li>
+                            </ul>
+                        </li>
+                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
+                        <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
+                        <div th:if="${admin != null}">
+                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit">Вихід</button>
+                                </form>
+                            </li>
+                        </div>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Меню</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div class="inner-content">
+                            <h4>СОФІЯ </h4>
+                            <span>Весільний салон</span>
+                            <div class="main-border-button">
+                                <a href="/sykni?filter=discount">Розпродаж!</a>
+                            </div>
+                        </div>
+                        <div th:if="${mainDiscount != null}">
+                            <img th:src="@{${'/img/' + mainDiscount.filename}}">
+                        </div>
+                        <div th:if="${mainDiscount == null}">
+                            <img src="images/left-banner-image.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Весільні плаття</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Весільні плаття</h4>
+                                            <p>Зроби цей день незабутнім.</p>
+                                            <div class="main-border-button">
+                                                <a href="/sykni">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${weedingDress != null}">
+                                        <img th:src="@{${'/img/' + weedingDress.filename}}">
+                                    </div>
+                                    <div th:if="${weedingDress == null}">
+                                        <img src="images/baner-right-image-01.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Вечірні плаття</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Вечірні плаття</h4>
+                                            <p>Цей вечір буде твоїм.</p>
+                                            <div class="main-border-button">
+                                                <a href="/vechirnipsykni">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${nightDress != null}">
+                                        <img th:src="@{${'/img/' + nightDress.filename}}">
+                                    </div>
+                                    <div th:if="${nightDress == null}">
+                                        <img src="images/baner-right-image-02.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Найбільш популярні</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Найбільш популярні</h4>
+                                            <p>Будь в ногу з модою.</p>
+                                            <div class="main-border-button">
+                                                <a href="/sykni?filter=bestseller">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${mostPopular != null}">
+                                        <img th:src="@{${'/img/' + mostPopular.filename}}">
+                                    </div>
+                                    <div th:if="${mostPopular == null}">
+                                        <img src="images/baner-right-image-03.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="right-first-image">
+                                <div class="thumb">
+                                    <div class="inner-content">
+                                        <h4>Аксесуари</h4>
+                                    </div>
+                                    <div class="hover-content">
+                                        <div class="inner">
+                                            <h4>Аксесуари</h4>
+                                            <p>Крапля елегантності.</p>
+                                            <div class="main-border-button">
+                                                <a href="/aksesuary">Більше..</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div th:if="${accessory != null}">
+                                        <img th:src="@{${'/img/' + accessory.filename}}">
+                                    </div>
+                                    <div th:if="${accessory == null}">
+                                        <img src="images/baner-right-image-04.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+<!-- ***** Women Area Starts ***** -->
+<section class="section" id="women">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>Новинки</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kid-item-carousel">
+                    <div class="owl-kid-item owl-carousel">
+
+                        <div class="item" th:each="best: ${novelties}">
+                            <a th:href="@{${'/sykni/' + best.id}}">
+                                <div class="thumb">
+                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
+                                </div>
+                                <div class="down-content">
+                                    <span style="color: red;font-size: 10px" th:if="${best.ifNew}">Новинка</span>
+                                    <h4 th:text="${best.name}"></h4>
+                                    <span th:text="@{${best.price} +' грн'}"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- ***** Women Area Ends ***** -->
+
+<!-- ***** Explore Area Starts ***** -->
+<section class="section" id="explore">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <h2>Explore Our Products</h2>
+                    <span>You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.</span>
+                    <div class="quote">
+                        <i class="fa fa-quote-left"></i>
+                        <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+                    </div>
+                    <p>There are 5 pages included in this HexaShop Template and we are providing it to you for
+                        absolutely free of charge at our TemplateMo website. There are web development costs for us.</p>
+                    <p>If this template is beneficial for your website or business, please kindly <a rel="nofollow"
+                                                                                                     href="https://paypal.me/templatemo"
+                                                                                                     target="_blank">support
+                        us</a> a little via PayPal. Please also tell your friends about our great website. Thank you.
+                    </p>
+                    <div class="main-border-button">
+                        <a href="products.html">Discover More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="leather">
+                                <h4>Leather Bags</h4>
+                                <span>Latest Collection</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="first-image">
+                                <img src="images/explore-image-01.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="second-image">
+                                <img src="images/explore-image-02.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="types">
+                                <h4>Different Types</h4>
+                                <span>Over 304 Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Explore Area Ends ***** -->
+
+<!-- ***** Social Area Starts ***** -->
+<section class="section" id="social">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/gallery">
+                    <div class="section-heading">
+                        <h2>НАШ БЛОГ</h2>
+                        <span>Фото наших клієнтів, тренди нового сезону, фотозвіти з подій.</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row images">
+            <div class="col-2" th:each="item: ${gallery}">
+                <div class="thumb">
+                    <div class="icon">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    <img style="width: auto;height:180px" th:src="@{${'/img/' + item.filename}}">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- ***** Social Area Ends ***** -->
+<div class="subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/response">
+                    <div class="section-heading">
+                        <h2>ВІДГУКИ</h2>
+                        <span>Кожен відгук допомагає Нам стати кращими. Натисни та переглянь історію.</span>
+                    </div>
+                </a>
+                <form method="get" action="/response/add">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <fieldset>
+                                <input name="name" type="text" placeholder="Ваше імя" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3">
+                            <fieldset>
+                                <textarea maxlength="200" name="description" type="text" placeholder="Опис" required></textarea>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="main-dark-button"><i
+                                        class="fa fa-paper-plane"></i></button>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="rating-area">
+                        <input type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5" title="Оцінка «5»"></label>
+                        <input type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4" title="Оцінка «4»"></label>
+                        <input type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3" title="Оцінка «3»"></label>
+                        <input type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2" title="Оцінка «2»"></label>
+                        <input type="radio" id="star-1" name="rating" value="1" required>
+                        <label for="star-1" title="Оцінка «1»"></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+</body>
+</html>an>Фото наших клієнтів, тренди нового сезону, фотозвіти з подій.</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row images">
+            <div class="col-2" th:each="item: ${gallery}">
+                <div class="thumb">
+                    <div class="icon">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    <img style="width: auto;height:180px" th:src="@{${'/img/' + item.filename}}">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- ***** Social Area Ends ***** -->
+<div class="subscribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/response">
+                    <div class="section-heading">
+                        <h2>ВІДГУКИ</h2>
+                        <span>Кожен відгук допомагає Нам стати кращими. Натисни та переглянь історію.</span>
+                    </div>
+                </a>
+                <form method="get" action="/response/add">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <fieldset>
+                                <input name="name" type="text" placeholder="Ваше імя" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3">
+                            <fieldset>
+                                <textarea maxlength="200" name="description" type="text" placeholder="Опис" required></textarea>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="main-dark-button"><i
+                                        class="fa fa-paper-plane"></i></button>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="rating-area">
+                        <input type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5" title="Оцінка «5»"></label>
+                        <input type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4" title="Оцінка «4»"></label>
+                        <input type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3" title="Оцінка «3»"></label>
+                        <input type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2" title="Оцінка «2»"></label>
+                        <input type="radio" id="star-1" name="rating" value="1" required>
+                        <label for="star-1" title="Оцінка «1»"></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ***** Footer Start ***** -->
+<footer th:insert="~{fragments/singleProduct :: footer}"></footer>
+<div th:insert="~{fragments/singleProduct :: skripts}"></div>
+</body>
+</html>
