@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ua.weeding.core.token.ConfirmationToken;
 import ua.weeding.core.token.ConfirmationTokenService;
 import ua.weeding.core.user.User;
 import ua.weeding.core.user.UserService;
@@ -17,31 +18,31 @@ import java.util.Optional;
 public class LoginNRegistrController {
     private final UserService userService;
     private final ConfirmationTokenService tokenService;
-
+//    private final EmailSenderService emailSenderService;
 
     @GetMapping("/login")
     public String login(@AuthenticationPrincipal UserDetails customUser,
                         Model model) {
         return "user/login";
     }
-
-    @GetMapping("/reset")
-    public String repair(Model model,
-                         @Param("email") Optional<String> email) {
-        if (email.isPresent()) {
-            Optional<User> existingUser = userService.findByEmail(email.orElseThrow());
-            if (existingUser.isPresent()) {
+//
+//    @GetMapping("/reset")
+//    public String repair(Model model,
+//                         @Param("email") Optional<String> email) {
+//        if (email.isPresent()) {
+//            Optional<User> existingUser = userService.findByEmail(email.orElseThrow());
+//            if (existingUser.isPresent()) {
 //                ConfirmationToken confirmationToken = new ConfirmationToken(existingUser.get().getId());
 //                tokenService.save(confirmationToken);
 //                emailSenderService.sendSimpleEmail(existingUser.get().getEmail(), "Відновлення пароля", "Привіт для того щоб відновити Ваш пароль перейдіть за посиланням http://localhost:8080/changepassword?token=" + confirmationToken.getConfirmationToken());
 //                model.addAttribute("restoreOk", "Посилання з відновленням було вислано на Вашу поштову скриньку.");
-                return "redirect:/login";
-            } else {
-                model.addAttribute("errorAdmin", "Такий адміністратор не зареєстрований, ми проінформуємо адміністратора про не санкціоновану спробу входу.");
-            }
-        }
-        return "user/login";
-    }
+//                return "redirect:/login";
+//            } else {
+//                model.addAttribute("errorAdmin", "Такий адміністратор не зареєстрований, ми проінформуємо адміністратора про не санкціоновану спробу входу.");
+//            }
+//        }
+//        return "user/login";
+//    }
 
 
     //    @GetMapping("/registration")
