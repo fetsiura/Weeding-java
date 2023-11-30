@@ -23,7 +23,7 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="scroll-to-section"><a href="/" >Головна</a></li>
                         <li class="submenu">
                             <a href="javascript:;">Сукні</a>
                             <ul>
@@ -35,7 +35,7 @@
                         <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
                         <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
                         <div th:if="${admin != null}">
-                            <li class="scroll-to-section"><a href="/admin">Адмін панель</a></li>
+                            <li class="scroll-to-section"><a class="active" href="/admin">Адмін панель</a></li>
                             <li class="scroll-to-section">
                                 <form th:action="@{/logout}" method="post">
                                     <button type="submit">Вихід</button>
@@ -112,16 +112,17 @@
                     <input type="number" name="price" required>
                 </div>
                 <div>
+                    <span>Бренд:</span><br>
+                    <input type="text" name="brand" required>
+                </div>
+
+                <div>
                     <span>Колір:</span><br>
                     <input type="text" name="colour" required>
                 </div>
                 <div>
                     <span>Розмір:</span><br>
                     <input type="text" name="sizes" required>
-                </div>
-                <div>
-                    <span>Бренд:</span><br>
-                    <input type="text" name="brand" required>
                 </div>
                 <div>
                     <span>Опис:</span><br>
@@ -192,11 +193,11 @@
                     </div>
                 </div>
                 <a th:href="@{'/admin/editDress?id='+${dress.id}}">
-                    <button class="btn"><i class="fa fa-close"></i> Редагувати</button>
+                    <button class="btn-outline btn"><i class="fa fa-close"></i> Редагувати</button>
                 </a>
                 <form th:method="post" th:action="@{/admin/deletedress}">
                     <input type="hidden" name="id" th:value="${dress.id}">
-                    <button type="submit" class="btn"><i class="fa fa-trash"></i> Видалити</button>
+                    <button type="submit" class="btn btn-outline"><i class="fa fa-trash"></i> Видалити</button>
                 </form>
             </div>
         </div>

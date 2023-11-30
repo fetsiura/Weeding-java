@@ -24,9 +24,9 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="scroll-to-section"><a href="/" >Головна</a></li>
                         <li class="submenu">
-                            <a href="javascript:;">Сукні</a>
+                            <a href="javascript:;" class="active">Сукні</a>
                             <ul>
                                 <li><a href="/sykni">Весільні сукні</a></li>
                                 <li><a href="/vechirnisykni">Вечірні сукні</a></li>
@@ -91,7 +91,7 @@
                 <a th:href="@{${'/sykni/' + dress.id}}">
                     <div class="item">
                         <div class="thumb">
-                            <img style="width: auto;height: 390px" th:src="@{${'/img/' + dress.pictures[0]}}">
+                            <img class="img-responsive" style="width: auto;height: 390px" th:src="@{${'/img/' + dress.pictures[0]}}">
                         </div>
                         <div class="down-content">
                             <span style="color: red;font-size: 10px" th:if="${dress.ifNew}">Новинка</span>
@@ -124,7 +124,7 @@
                         <div class="item" th:each="best: ${bestsellers}">
                             <a th:href="@{${'/sykni/' + best.id}}">
                                 <div class="thumb">
-                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
+                                    <img class="img-responsive" style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
                                 </div>
                                 <div class="down-content">
                                     <span style="color: red;font-size: 10px" th:if="${best.ifNew}">Новинка</span>
@@ -158,7 +158,7 @@
                         <div class="item" th:each="accessory: ${accessories}">
                             <a th:href="@{${'/accessory/' + accessory.id}}">
                                 <div class="thumb">
-                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + accessory.pictures[0]}}">
+                                    <img class="img-responsive" style="width: auto;height:370px" th:src="@{${'/img/' + accessory.pictures[0]}}">
                                 </div>
                                 <div class="down-content">
                                     <h4 th:text="${accessory.name}"></h4>

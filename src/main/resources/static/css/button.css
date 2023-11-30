@@ -1,6 +1,6 @@
 .btn {
     background-color: #52575e; /* Blue background */
-    border: none; /* Remove borders */
+    border: 2px solid white;
     color: white; /* White text */
     padding: 12px 13px; /* Some padding */
     font-size: 13px; /* Set a font size */

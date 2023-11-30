@@ -24,7 +24,7 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="/" class="active">Головна</a></li>
+                        <li class="scroll-to-section"><a href="/" >Головна</a></li>
                         <li class="submenu">
                             <a href="javascript:;">Сукні</a>
                             <ul>
@@ -32,7 +32,7 @@
                                 <li><a href="/vechirnisykni">Вечірні сукні</a></li>
                             </ul>
                         </li>
-                        <li class="scroll-to-section"><a href="/accessory">Аксесуари</a></li>
+                        <li class="scroll-to-section"><a href="/accessory" class="active">Аксесуари</a></li>
                         <li class="scroll-to-section"><a href="/gallery">Галерея</a></li>
                         <li class="scroll-to-section"><a href="/contact">Контакти</a></li>
                         <div th:if="${admin != null}">
@@ -89,7 +89,7 @@
                 <a th:href="@{${'/accessory/' + accessory.id}}">
                     <div class="item">
                         <div class="thumb">
-                            <img style="width: auto;height: 390px" th:src="@{${'/img/' + accessory.pictures[0]}}">
+                            <img class="img-responsive" style="width: auto;height: 390px" th:src="@{${'/img/' + accessory.pictures[0]}}">
                         </div>
                         <div class="down-content">
                             <h4 th:text="${accessory.name}"></h4>
@@ -122,7 +122,7 @@
                         <div class="item" th:each="best: ${bestsellers}">
                             <a th:href="@{${'/sykni/' + best.id}}">
                                 <div class="thumb">
-                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
+                                    <img class="img-responsive" style="width: auto;height:370px" th:src="@{${'/img/' + best.pictures[0]}}">
                                 </div>
                                 <div class="down-content">
                                     <h4 th:text="${best.name}"></h4>
@@ -155,7 +155,7 @@
                         <div class="item" th:each="accessory: ${accessoriesSpot}">
                             <a th:href="@{${'/accessory/' + accessory.id}}">
                                 <div class="thumb">
-                                    <img style="width: auto;height:370px" th:src="@{${'/img/' + accessory.pictures[0]}}">
+                                    <img class="img-responsive" style="width: auto;height:370px" th:src="@{${'/img/' + accessory.pictures[0]}}">
                                 </div>
                                 <div class="down-content">
                                     <h4 th:text="${accessory.name}"></h4>
